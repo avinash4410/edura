@@ -1,0 +1,61 @@
+.main {
+  width: 100%;
+  height: 500px;
+  margin-left: 90px;
+  background-color: aqua;
+}
+
+.h {
+  color: red;
+  text-align: center;
+}
+
+table {
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+td,
+th {
+  border: 1px solid black;
+  text-align: left;
+  padding: 4px;
+}
+
+tr:nth-child(even) {
+  background-color: #dddddd;
+}
+
+@media screen {
+  .card-header {
+    text-decoration-color: black;
+    text-align: center;
+    text-decoration-style: double;
+  }
+
+  .card-body {
+    text-align: justify;
+    text-decoration: dotted;
+    text-decoration-color: black;
+  }
+}
+
+@media print {
+  .btn {
+    display: none;
+  }
+
+  .form-control {
+    border: 0px;
+    table-layout: 0px;
+  }
+
+  .left {
+    text-align: right;
+    font-style: italic;
+    font-size: large;
+    text-decoration-color: black;
+    text-decoration-style: double;
+  }
+}

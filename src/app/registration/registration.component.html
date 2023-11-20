@@ -1,0 +1,196 @@
+<div class="login-card">
+  <h2> Registration Form </h2>
+  <form [formGroup ]="registerForm" (ngSubmit)="onSubmit()">
+    <div class="formrow">
+      <div class="formcol">
+        <label for="photo">Choose Photo</label>
+        <input type="file" id="photo" name="photo" accept="image/*" class="form-control form-control-sm"
+          (change)="onFileChanged($event)"><br>
+        <div *ngIf="url" class="formrow">
+          <div class="formcol" style="width:25%">
+
+            <label>Photo Preview</label>
+          </div>
+          <div class="formcol">
+
+            <img id="photoPreview" [src]="url" alt="Selected Photo" class="img-thumbnail">
+          </div>
+        </div>
+      </div>
+      <div class="formcol">
+        <label for="fullName">First Name</label>
+        <input type="text" id="firstName" formControlName="firstName" minlength="2" required
+          class="form-control form-control-sm">
+        <small class="text-danger"
+          *ngIf="!registerForm.get('firstName')?.valid && registerForm.get('firstName')?.touched">
+          <span *ngIf="registerForm.get('firstName')?.errors?.['required']">First Name required</span>
+          <span *ngIf="registerForm.get('firstName')?.errors?.['pattern']">Enter valid name</span>
+          <span *ngIf="registerForm.get('firstName')?.errors?.['minlength']">First is name too short...!</span>
+        </small>
+
+        <label for="middleName">Middle Name</label>
+        <input type="text" id="middleName" formControlName="middleName" minlength="2"
+          class="form-control form-control-sm">
+        <small class="text-danger"
+          *ngIf="!registerForm.get('middleName')?.valid && registerForm.get('middleName')?.touched">
+          <span *ngIf="registerForm.get('middleName')?.errors?.['pattern']">Enter valid name</span>
+        </small>
+
+        <label for="lastName">Last Name</label>
+        <input type="text" id="lastName" formControlName="lastName" minlength="2" class="form-control form-control-sm">
+        <small class="text-danger"
+          *ngIf="!registerForm.get('lastName')?.valid && registerForm.get('lastName')?.touched">
+          <span *ngIf="registerForm.get('lastName')?.errors?.['required']">Last Name required</span>
+          <span *ngIf="registerForm.get('lastName')?.errors?.['pattern']">Enter valid name</span>
+          <span *ngIf="registerForm.get('lastName')?.errors?.['minlength']">Last name is too short...!</span>
+        </small>
+
+        <label for="gender">Gender</label>
+        <select id="gender" formControlName="gender" class="form-control form-control-sm">
+          <option value="male">Male</option>
+          <option value="female">Female</option>
+        </select>
+        <small class="text-danger"
+          *ngIf="registerForm.get('gender')?.touched && registerForm.get('gender')?.errors?.['required']">
+          Gender is required
+        </small>
+      </div>
+    </div>
+    <div class="formrow">
+      <div class="formcol">
+        <label for="mobileNumber">Mobile Number</label>
+        <input type="text" id="mobileNumber" formControlName="mobileNumber" placeholder="(Optional)"
+          class="form-control form-control-sm">
+
+        <br>
+        <button type="button" (click)="sendEmailVerificationCode()">Get OTP for email verification</button>
+      </div>
+      <div class="formcol">
+        <label for="email"> Email </label>
+        <input #email type="email" id="email" formControlName="email" class="form-control form-control-sm">
+        <small class="text-danger" *ngIf="!registerForm.get('email')?.valid && registerForm.get('email')?.touched">
+          <span *ngIf="registerForm.get('email')?.errors?.['required']">Enter Email</span>
+          <span *ngIf="registerForm.get('email')?.errors?.['email']">Enter valid Email</span>
+          <span *ngIf="registerForm.get('email')?.errors?.['emailAlreadyExist']">Email already exist</span>
+        </small>
+        <!-- <button type="button" (click)="sendEmailVerificationCode()">Get OTP for email verification</button> -->
+        <label for="emailOTP">
+          <i class="fas fa-envelope"></i> Email OTP (6 digits)
+        </label>
+        <input type="text" id="emailOTP" formControlName="emailOTP" class="form-control form-control-sm">
+        <small class="text-danger"
+          *ngIf="!registerForm.get('emailOTP')?.valid && registerForm.get('emailOTP')?.touched">
+          <span *ngIf="registerForm.get('emailOTP')?.errors?.['required']">Otp required</span>
+        </small>
+      </div>
+    </div>
+    <div class="formrow">
+      <div class="formcol">
+        <label for="govtProof">Government Proof Choose</label>
+        <select id="govtProof" formControlName="govtProof" class="form-control form-control-sm">
+          <option value="aadhar">Aadhar Card</option>
+          <option value="pan">PAN Card</option>
+          <option value="id">ID Card</option>
+          <option value="other">Other</option>
+        </select>
+        <small class="text-danger"
+          *ngIf="!registerForm.get('govtProof')?.valid && registerForm.get('govtProof')?.touched">
+          <span *ngIf="registerForm.get('govtProof')?.errors?.['required']">Choose any one</span>
+        </small>
+
+      </div>
+      <div class="formcol">
+        <label for="govtProofFile">Upload Government Proof</label>
+        <input type="file" id="govtProofFile" name="govtProofFile" accept="image/*"
+          class="form-control form-control-sm">
+      </div>
+    </div>
+    <div class="formrow">
+      <div class="formcol">
+        <label for="orgIDType">Organization ID Type</label>
+        <select formControlName="orgIDType" class="form-control form-control-sm">
+          <option value="">Select an option</option>
+          <option value="studentID">Student ID Card</option>
+          <option value="ownerID">School Owner ID</option>
+          <option value="teacherID">Teacher ID</option>
+          <option value="otherID">Other</option>
+        </select>
+        <small class="text-danger"
+          *ngIf="!registerForm.get('orgIDType')?.valid && registerForm.get('orgIDType')?.touched">
+          <span *ngIf="registerForm.get('orgIDType')?.errors?.['required']">Choose any one</span>
+        </small>
+      </div>
+      <div class="formcol">
+        <label for="orgIDFile">Upload Organization ID</label>
+        <input type="file" id="orgIDFile" name="orgIDFile" accept="image/*" class="form-control form-control-sm">
+      </div>
+    </div>
+    <div class="formrow">
+      <div class="formcol">
+        <label>Do you want to use this system?</label>
+        <br>
+        <input type="radio" formControlName="useSystem" name="useSystem" value="yes"> Yes
+
+        <br>
+        <input type="radio" formControlName="useSystem" name="useSystem" value="no"> No
+
+        <br> <small class="text-danger"
+          *ngIf="!registerForm.get('useSystem')?.valid && registerForm.get('useSystem')?.touched">
+          <span *ngIf="registerForm.get('useSystem')?.errors?.['required']">Choose any one</span>
+        </small>
+      </div>
+      <div class="formcol">
+        <label>Are you registering for your organization?</label>
+        <br>
+
+        <input type="radio" formControlName="registerOrg" name="registerOrg" value="yes"> Yes
+        <br>
+        <input type="radio" formControlName="registerOrg" name="registerOrg" value="no"> No
+        <small class="text-danger"
+          *ngIf="!registerForm.get('registerOrg')?.valid && registerForm.get('registerOrg')?.touched">
+          <span *ngIf="registerForm.get('registerOrg')?.errors?.['required']">Choose any one</span>
+        </small>
+      </div>
+    </div>
+    <div class="formrow">
+      <div class="formcol">
+        <label for="username">Username</label>
+        <input type="text" id="username" formControlName="username" name="username"
+          class="form-control form-control-sm">
+        <small class="text-danger"
+          *ngIf="!registerForm.get('username')?.valid && registerForm.get('username')?.touched">
+          <span *ngIf="registerForm.get('username')?.errors?.['required']">User name required</span>
+        </small>
+      </div>
+      <div class="formcol">
+        <label for="password">Password</label>
+        <input type="password" id="password" formControlName="password" name="password"
+          class="form-control form-control-sm">
+        <small class="text-danger"
+          *ngIf="!registerForm.get('password')?.valid && registerForm.get('password')?.touched">
+          <span *ngIf="registerForm.get('password')?.errors?.['required']">Password required</span>
+        </small>
+      </div>
+    </div>
+    <div class="formrow">
+      <div class="formcol">
+        <span class="captcha" style="display: flex;">
+          <canvas id="canvas"></canvas>
+          <span>
+            <a id="refresh" (click)="reloadCaptcha()">Refresh</a>
+            <input placeholder="Enter Captcha text" type="text" formControlName="captchaText">
+            <div class="text-danger"
+              *ngIf="!registerForm.get('captchaText')?.valid && registerForm.get('captchaText')?.touched">
+              <span *ngIf="registerForm.get('captchaText')?.errors?.['required']">Captcha text required</span>
+              <span *ngIf="registerForm.get('captchaText')?.errors?.['invalidCaptcha']">Invalid Captcha</span>
+            </div>
+          </span>
+        </span>
+      </div>
+      <div class="formcol">
+        <!-- <label for="sqlFile">SQL File Create automaticaly</label> -->
+        <button>Submit</button>
+      </div>
+    </div>
+  </form>
+</div>

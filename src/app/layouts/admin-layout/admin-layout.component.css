@@ -1,0 +1,158 @@
+.sidenav::-webkit-scrollbar {
+    width: 8px;
+}
+
+.sidenav::-webkit-scrollbar-thumb {
+    background-color: white; /* You can customize the color */
+    border-radius: 4px;
+}
+
+.sidenav::-webkit-scrollbar-track {
+    background: #263238; /* You can customize the background color */
+}
+
+.sidenav {
+    background: #263238;
+    transition: all .5s ease;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    width: 3.5rem; /* Adjusted width */
+    height: 100vh;
+    box-shadow: 0.063rem 0 1.25rem 0 #8690a3;
+    overflow-y: hidden;
+     scrollbar-width: thin;
+    scrollbar-color: #4CAF50 #263238;
+}
+
+.sidenav .logo-container {
+    display: flex;
+    align-items: center;
+    padding: 0.938rem 0.938rem 0.938rem;
+    width: 100%;
+}
+
+.sidenav .logo {
+    background: #fff;
+    text-align: center;
+    width: 2.5rem; /* Adjusted width */
+    min-width: 2.5rem; /* Adjusted min-width */
+    border-radius: 0.313rem;
+    padding: 0.313rem;
+    font-size: 18px; /* Adjusted font size */
+    font-weight: 700;
+    cursor: pointer;
+    border: none;
+}
+
+.sidenav .logo-text {
+    margin-left: 1.5rem; /* Adjusted margin */
+    font-size: 16px; /* Adjusted font size */
+    font-weight: 600; /* Adjusted font weight */
+    color: #fff;
+}
+
+.sidenav .btn-close {
+    margin-left: 1.5rem; /* Adjusted margin */
+    cursor: pointer;
+    width: 1.5rem;
+    height: 1.5rem;
+    border-radius: 50%;
+    background-color: transparent;
+    border: none;
+}
+
+.sidenav .fa-times {
+    color: #fff;
+    font-size: 18px;
+}
+
+.sidenav-collapsed {
+    width: 12.6rem; /* Adjusted width */
+    overflow-y: auto;
+}
+
+.sidenav-nav {
+    list-style: none;
+    padding: 0.938rem;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: calc(100% - 3.65rem);
+    cursor: pointer;
+}
+
+.sidenav-nav-item {
+    width: 100%;
+    margin-bottom: 0.625rem;
+}
+
+.sidenav-nav-link {
+    display: flex;
+    align-items: center;
+    height: 2.5rem;
+    border-radius: 0.313rem;
+    color: #f3f3f3;
+    text-decoration: none;
+    transition: all .3s ease;
+}
+
+.sidenav-link-icon {
+    font-size: 14px; /* Adjusted font size */
+    width: 1.5rem;
+    min-width: 1.5rem;
+    margin: 0 0.3rem;
+    text-align: center;
+}
+
+.sidenav-link-text {
+    /* margin-left: 1rem; */
+    font-size: 12px; /* Adjusted font size */
+}
+
+.sidenav-nav-item:hover .sidenav-nav-link {
+    background-color: #fff;
+    color: #000;
+    /* align-items: center; */
+}
+
+.active {
+    background: #fff;
+}
+
+.active .sidenav-link-icon,
+.active .sidenav-link-text {
+    color: #000;
+}
+
+.sidenav .sub-menu-item {
+    /* margin: 10px 0; */
+    /* padding-left: 20px; */
+    display: none;
+    margin-right: 100px;
+    width: 150px;
+}
+
+.sidenav .sub-menu-item a {
+    color: #fff;
+    text-decoration: none;
+    display: block;
+    
+    /* padding: 5px 0; */
+    font-size: 12px; /* Adjusted font size */
+}
+
+.sidenav .sidenav-nav-link.active + ul .sub-menu-item {
+    display: block;
+}
+
+.sidenav .sub-menu-item:hover {
+    background-color: #555;
+}
+
+
+body.sidenav-expanded .col-12.ps-0 {
+    margin-left: 80px; /* Adjust the margin to create space for the open menu */
+    transition: margin-left 0.3s ease; /* Add transition for smooth animation */
+}

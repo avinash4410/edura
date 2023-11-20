@@ -1,0 +1,212 @@
+<div class="full-page">
+  <div class="wrapper" style="height: 50%; width: 90%; margin-top: 5%;">
+
+    <!-- ------logo -->
+    <div class="text-center mt- name">
+      EduRA
+    </div>
+    <div class="col-4" style="text-align: center; margin-left: 40%;">
+      <div class="Section">
+
+        <!-- ----system name -->
+        <form [formGroup]="Form" (ngSubmit)="onLogin()">
+          <!-- <h6>{{loginMode ? 'Login ...........!' : 'New Register'}}</h6> -->
+
+          <!-- --- -->
+          <!-- <input type="text" class="form-control" placeholder="name" id="NAAA"> -->
+<!-- 
+          <div *ngIf="!loginMode && !otpMode" class="form-field d-flex align-items-center">
+            <label for="name" class="form-label">Name</label>
+            <input type="text" class="form-control" id="name" formControlName="name" placeholder="Name">
+          </div> -->
+
+          <div *ngIf="!loginMode && !otpMode" class="form-field d-flex align-items-center">
+            <label for="contactNumber" class="form-label">Contact Number</label>
+            <input type="text" class="form-control" id="role" formControlName="contactNumber"
+              placeholder="Contact number" pattern="[0-9]{10}">
+            <small class="text-danger" *ngIf="Form.get('contactNumber')?.errors?.pattern">
+              Mobile number must be 10 digits long.
+            </small>
+          </div>
+          <!-- Role Field -->
+          <!-- <div *ngIf="!loginMode">
+                      <label for="role" class="form-label">Role</label>
+                      <input type="text" class="form-control" id="role" formControlName="role" placeholder="Role">
+                    </div> -->
+
+          <!-- City Field -->
+          <!-- <div *ngIf="!loginMode && !otpMode"class="form-field d-flex align-items-center">
+          <label for="city" class="form-label">City</label>
+          <input type="text" class="form-control" id="city" formControlName="city" placeholder="City">
+        </div> -->
+
+          <!-- ID Proof Field -->
+          <div *ngIf="!loginMode && !otpMode" class="form-field d-flex align-items-center">
+            <label for="id_proof" class="form-label">ID Proof</label>
+            <input type="text" class="form-control" id="id_proof" formControlName="id_proof" placeholder="ID Proof">
+          </div>
+
+          <!-- Email Field -->
+
+          <div *ngIf="!loginMode || otpMode || forgetMode">
+            <div class="form-field d-flex align-items-center">
+
+              <label for="email"></label>
+              <div>
+                <input type="email" class="form-control" id="email" formControlName="email" placeholder="Email">
+
+                <small *ngIf="emailRequired" class="text-danger">Email required</small>
+
+              </div>
+            </div>
+          </div>
+
+          <div>
+            <button *ngIf="(forgetMode || otpMode) && !otpSent" type="button"
+              class="btn btn-outline-success btn-block px-3" (click)="sendEmailVerificationCode(Form.value.email)"
+              style="margin-right: 5%;">
+              Send OTP
+            </button>
+            <br>
+          </div>
+
+
+          <div *ngIf="forgetMode" class="form-field d-flex align-items-center">
+            <label for="emailOTP" class="form-label"></label>
+            <input type="emailOTP" class="form-control" id="emailOTP" formControlName="emailOTP" placeholder="OTP">
+            <small *ngIf="otpRequired" class="text-danger">Email OTP required</small>
+          </div>
+
+
+          <!-- Organization Name Field -->
+          <div *ngIf="!loginMode && !otpMode" class="form-field d-flex align-items-center">
+            <label for="organization_name" class="form-label">Organization Name</label>
+            <input type="text" class="form-control" id="organization_name" formControlName="organization_name"
+              placeholder="Organization Name">
+          </div>
+
+          <!-- Age Field -->
+          <div *ngIf="!loginMode && !otpMode" class="form-field d-flex align-items-center">
+            <label for="age" class="form-label">Age</label>
+            <input type="number" class="form-control" id="age" formControlName="age" placeholder="Age">
+          </div>
+
+          <div *ngIf="!otpMode && !forgetMode" class="form-field d-flex align-items-center">
+            <!-- // username -->
+            <label for="Username" class="form-label" style="margin-right: 5%;"> Username</label>
+            <input type="text" class="form-control" placeholder="Username" autocomplete="username" required
+              formControlName="username">
+          </div>
+
+          <small class="info" class="far fa-times-circle shine"
+            *ngIf="!Form.get('username')?.valid && Form.get('username')?.touched">
+            <span *ngIf="Form.get('username')?.errors?.['required']">User Name required</span>
+          </small>
+          <!-- <small class="text-danger" *ngIf="Form.get('username')?.hasError('required')">
+                        User Name is required.
+                      </small> -->
+          <small class="text-danger" *ngIf="Form.get('username')?.hasError('invalidUsername')">
+            User Name must not contain special characters.
+          </small>
+
+          <div *ngIf="!otpMode && !forgetMode" class="form-field d-flex align-items-center">
+            <!-- //PassWord -->
+            <label for="password" class="form-label" style="margin-right: 5%;">Password</label>
+
+            <input type="password" class="form-control" placeholder="Password" autocomplete="current-password" required
+              formControlName="password">
+          </div>
+          <div>
+            <small class="text-danger" *ngIf="!Form.get('password')?.valid && Form.get('password')?.touched">
+              <span *ngIf="Form.get('password')?.errors?.['required']">Password required</span>
+            </small>
+          </div>
+
+          <div *ngIf="forgetMode" class="form-field d-flex align-items-center">
+            <label for="password" class="form-label"></label>
+
+            <input type="password" class="form-control" placeholder="New password" autocomplete="current-password"
+              required formControlName="password">
+            <div class="">
+              <small class="text-danger" *ngIf="!Form.get('password')?.valid && Form.get('password')?.touched">
+                <span *ngIf="Form.get('password')?.errors?.['required']">Password required</span>
+              </small>
+            </div>
+          </div>
+
+          <div *ngIf="forgetMode" class="form-field d-flex align-items-center">
+            <label for="password" class="form-label"></label>
+            <input type="password" class="form-control" placeholder="Confirm Password" autocomplete="current-password"
+              required formControlName="password">
+            <br>
+            <div class="">
+              <small class="text-danger" *ngIf="!Form.get('password')?.valid && Form.get('password')?.touched">
+                <span *ngIf="Form.get('password')?.errors?.['required']"> ConfimPassword required</span>
+              </small>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-5" style="text-align: start;">
+
+              <canvas id="canvas" width="160" height="38px"
+                style="border-radius: 0.8em; align-items: center; padding-top: 14px; margin-left: 45%; background: #efcdcd;"></canvas>
+            </div>
+
+            <div class="col-3" style="text-align: end;">
+              <button type="button" id="reload-button" (click)="reloadCaptcha()">
+                <i class="bi bi-arrow-clockwise" style="font-size: 30px; color: red; border: none;"></i>
+              </button>
+            </div>
+          </div>
+
+          <div class="h">
+            <br>
+            <input type="text" id="user-input" formControlName="captchaText" placeholder="Enter the text in the image"
+              style=" background: #eae7e7; max-width: 80%; margin-left: 15%;"><br>
+            <br>
+            <small class="text-danger" *ngIf="!Form.get('captchaText')?.valid && Form.get('captchaText')?.touched">
+              <span *ngIf="Form.get('captchaText')?.errors?.['required']" style="margin-left: 30%;">Captcha
+                required</span>
+              <span *ngIf="Form.get('captchaText')?.errors?.invalidCaptcha">Invalid Captcha</span>
+            </small>
+          </div>
+
+          <div class="row">
+            <button *ngIf="!otpMode && !forgetMode" type="submit" class="btn btn-outline-primary btn-block px-14"
+              style="width: 25%; margin-left: 35%;">
+              {{loginMode ? 'Log In ' : 'Sign Up'}}
+            </button>
+
+            <button *ngIf="forgetMode" type="button" class="btn btn-outline-success btn-block px-2"
+              style="width: auto; margin-left: 5%;" (click)="resetPassword()">
+              SetPassword
+            </button>
+            <!-- <button *ngIf="otpMode && otpSent" type="button" class="btn btn-outline-success btn-block px-2"
+                        style="width: auto; margin-left: 5%;" (click)="verifyOTP(Form.value.email,Form.value.emailOTP)">
+                        verify OTP
+                      </button> -->
+            <!-- <button type="button" class="btn btn-outline-success btn-block px-2"
+                        style="width: auto; margin-left: 5%;" (click)="loginWithOtp()">
+                        {{otpMode ? 'Login with username & password' : 'Login with OTP' }}
+                      </button> -->
+
+
+            <!-- <button (click)="onLogin()">Login</button> -->
+          </div>
+          <div class="row">
+            <div *ngIf="!forgetMode" class="text-center fs-6">
+              {{loginMode ? 'Dont Have Account ?' : 'Already Have Account ?'}}
+              <!-- <a (click)="onModeSwitch()">{{loginMode ? 'Create One' : 'Sign In'}}</a> -->
+              <a [routerLink]="['../register']">{{loginMode ? 'Create One' : 'Sign In'}}</a>
+            </div>
+            <!-- </form> -->
+            <div *ngIf="!otpMode" class="text-center fs-6">
+              <a class="#" (click)="forget()">{{forgetMode ? 'Go to login' : 'Forgot password?'}}</a>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

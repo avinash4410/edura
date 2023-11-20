@@ -1,4 +1,12 @@
 import { Component } from '@angular/core';
+import { EventEmitter } from '@angular/core';
+
+interface SideNavToggle {
+  isSideNavCollapsed: boolean;
+  screenWidht: number;
+  screenWidth: number;
+  collapsed: boolean;
+}
 
 @Component({
   selector: 'app-root',
@@ -6,5 +14,6 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'Demo';
-}
+  title = 'front';
+
+  }

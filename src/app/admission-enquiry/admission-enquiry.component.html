@@ -1,0 +1,708 @@
+<div class="col-md-10" style="margin-left: 10%;">
+    <div class="col-md-10">
+        <p>admission-enquiry works!</p>
+
+
+        <h3 class="box-title"><i class="fa fa-search"></i> Select Criteria</h3>
+        <form [formGroup ]="myReactiveForm" (ngSubmit)="onSubmit()" class="row">
+            <div class="box-body row">
+                <div class="col-sm-4 col-md-4">
+                    <div class="form-group">
+                        <label>Enquiry Date</label>
+                        <div class="md-form md-outline input-with-post-icon datepicker">
+                            <input placeholder="Select date" type="date" class="form-control"
+                                formControlName="enquiryDate">
+                            <label>Try me...</label>
+                        </div>
+                    </div>
+                </div>
+                <!-- Source -->
+                <div class="col-sm-4 col-md-4">
+                    <div class="form-group">
+                        <label>Source</label>
+                        <select id="source" formControlName="source" class="form-control">
+                            <!-- <option reeadonly disabled selected>--Select--</option> -->
+                            <option>Select</option>
+                            <option value="MORNIG">MORNIG</option>
+                            <option value="NIGHT">NIGHT</option>
+                            <option value="DAY">DAY</option>
+                            <option value="OTHER">OTHER</option>
+                            <option value="News Paper">News Paper</option>
+                            <option value="Mobile">Mobile</option>
+                            <option value="Online">Online</option>
+                            <option value="Friends">Friends</option>
+                            <option value="student">student</option>
+                            <option value="department">department</option>
+                            <option value="department">department</option>
+                            <option value="staff">staff</option>
+                        </select>
+
+                        <small class="text-danger"
+                            *ngIf="!myReactiveForm.get('source')?.valid && myReactiveForm.get('source')?.touched">
+                            <span *ngIf="myReactiveForm.get('source')?.errors?.['required']">Source required</span>
+                        </small>
+                    </div>
+                </div>
+
+                <div class="col-sm-4 col-md-4">
+                    <div class="form-group">
+                        <label>Status</label>
+                        <select id="status" formControlName="status" class="form-control">
+                            <option>Select</option>
+                            <option value="all">All</option>
+                            <option value="active">Active</option>
+                            <!-- Add other status options here -->
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-sm-12">
+                        <button type="button" value=""
+                            class="btn btn-primary btn-sm checkbox-toggle pull-right"><i class="fa fa-search"></i>
+                            Search</button>
+                    </div>
+                </div>
+
+            </div>
+
+        </form>
+
+        <button (click)="addPopup()" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter"
+            type="button">ADD</button>
+
+        <!-- <button (click)="closePopup()"><i class="fa fa-search"></i>Close</button> -->
+        <div class="popup-overlay active" [hidden]="!showPopup">
+            <div class="popup-content">
+                <form [formGroup ]="myPopupForm" (ngSubmit)="onSubmit()">
+                    <div class="h1">
+                        <button (click)="closePopup()" type="button"
+                            class="btn btn-primary btn-sm checkbox-toggle pull-right" aria-label="Close"
+                            style="margin: auto;">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                        <h4 class="box-title"> Admission Enquiry</h4>
+
+                    </div>
+                    <div class="modal-body pt0 pb0">
+                        <div class="row">
+                            <div class="col-lg-12 col-md-12 col-sm-12">
+
+                                <div class="row">
+                                    <div class="col-sm-4">
+                                        <div class="form-group">
+                                            <label>Name</label><small class="req"> *</small>
+                                            <input type="text" autocomplete="off" class="form-control"
+                                                formControlName="name">
+                                            <span class="text-danger"></span>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <div class="form-group">
+                                            <label>Phone</label><small class="req"> *</small>
+                                            <input autocomplete="off" placeholder="" type="text" class="form-control"
+                                                formControlName="contact">
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <div class="form-group">
+                                            <label>Email</label>
+                                            <input type="text" formControlName="email" class="form-control">
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <div class="form-group">
+                                            <label>Address</label>
+                                            <textarea class="form-control" formControlName="address"></textarea>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-sm-4">
+                                        <div class="form-group">
+                                            <label>Description</label>
+                                            <textarea formControlName="description" class="form-control"></textarea>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <div class="form-group">
+                                            <label>Note</label>
+                                            <textarea formControlName="note" class="form-control"
+                                                autocomplete="off"></textarea>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <div class="form-group">
+                                            <label>Next Follow Up Date</label>
+                                            <div class="md-form md-outline input-with-post-icon datepicker">
+                                                <input placeholder="Select date" type="date" class="form-control"
+                                                    formControlName="nextFollowUpDate">
+                                                <!-- <label>Try me...</label> -->
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-sm-4">
+                                        <div class="form-group">
+                                            <label>Date</label>
+                                            <div class="md-form md-outline input-with-post-icon datepicker">
+                                                <input placeholder="Select date" type="date" class="form-control"
+                                                    formControlName="enquiryDate">
+                                                <!-- <label for="example">Try me...</label> -->
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <div class="form-group">
+                                            <label>Assigned</label>
+                                            <input type="text" formControlName="assigned" class="form-control">
+                                        </div><!--./form-group-->
+                                    </div>
+                                    <div class="col-sm-3">
+                                        <div class="form-group">
+                                            <label>Number Of Child</label>
+                                            <input type="number" class="form-control" min="1"
+                                                formControlName="no_of_child">
+                                        </div><!--./form-group-->
+                                    </div>
+                                    <div class="col-sm-2">
+                                        <div class="form-group">
+                                            <label>Reference</label>
+                                            <select formControlName="reference" class="form-control">
+                                                <option>Select</option>
+                                                <option value="enquiry officer">enquiry officer</option>
+                                                <option value="Student">Student</option>
+                                                <option value="Teacher">Teacher</option>
+                                            </select>
+                                        </div><!--./form-group-->
+                                    </div>
+                                    <div class="col-sm-2">
+                                        <div class="form-group">
+                                            <label>Source</label> <small class="req"> *</small>
+                                            <select formControlName="source" class="form-control">
+                                                <option>Select</option>
+                                                <option value="News Paper">News Paper</option>
+                                                <option value="Mobile">Mobile</option>
+                                                <option value="Online">Online</option>
+                                                <option value="Friends">Friends</option>
+                                                <option value="student">student</option>
+                                                <option value="department">department</option>
+                                                <option value="department">department</option>
+                                                <option value="staff">staff</option>
+
+                                            </select>
+                                        </div><!--./form-group-->
+                                    </div>
+
+                                    <div class="col-sm-2">
+                                        <div class="form-group">
+                                            <label>Status</label> <small class="req"> *</small>
+                                            <select formControlName="status" class="form-control">
+                                                <option>Select</option>
+                                                <option value="all">All</option>
+                                                <option value="active">Active</option>
+                                                <option value="passive">Passive</option>
+                                                <option value="dead">Dead</option>
+                                                <!-- <option value="Online">Won</option> -->
+                                                <!-- <option value="Online">Lost</option> -->
+                                            </select>
+                                        </div><!--./form-group-->
+                                    </div>
+
+                                    <div class="col-sm-2">
+                                        <div class="form-group">
+                                            <label>Class</label>
+                                            <select formControlName="class" class="form-control">
+                                                <option>Select</option>
+                                                <option value="60">1</option>
+                                                <option value="61">2</option>
+                                                <option value="62">3</option>
+                                                <option value="63">4</option>
+                                                <option value="64">5</option>
+                                                <option value="65">6</option>
+                                                <option value="66">7</option>
+                                                <option value="67">8</option>
+                                                <option value="68">9</option>
+                                                <option value="69">10</option>
+                                                <option value="70">11</option>
+                                            </select>
+                                        </div><!--./form-group-->
+
+                                    </div>
+
+
+
+
+                                </div><!--./row-->
+                                <div class="row">
+                                    <div class="box-footer col-md-12">
+                                        <button *ngIf="isUpdating == false" type="submit"
+                                            class="btn btn-info pull-right">Save</button>
+                                        <button *ngIf="isUpdating ==true" type="button" class="btn btn-info pull-right"
+                                            (click)="updateButton()">Update</button>
+
+                                        <!-- <a onclick="saveEnquiry()" class="btn btn-info pull-right">Save</a> -->
+                                    </div>
+                                </div>
+                            </div><!--./col-md-12-->
+                        </div><!--./row-->
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- ---- -->
+    <div class="box-body">
+        <div class="download_label">Admission Enquiry List</div>
+        <div class="mailbox-messages">
+            <div class="table-responsive">
+                <div id="enquirytable_wrapper" class="dataTables_wrapper no-footer">
+                    <div class="dt-buttons btn-group btn-group2">
+                        
+                        <a class="btn btn-default dt-button buttons-copy buttons-html5" tabindex="0"
+                            aria-controls="enquirytable" title="Copy" (click)="copyDataToClipboard()"><span><i
+                                    class="fa fa-files-o"></i></span>
+                        </a>
+
+                        <a class="btn btn-default dt-button buttons-excel buttons-html5" tabindex="0"
+                            aria-controls="enquirytable" title="Excel" (click)="exportexcel()">
+                            <span><i class="fa fa-file-excel-o"></i></span>
+                        </a>
+
+                        <a class="btn btn-default dt-button buttons-csv buttons-html5" tabindex="0"
+                            aria-controls="enquirytable" title="CSV" (click)="exportCsv()"><span><i
+                                    class="fa fa-file-text-o"></i></span>
+                        </a>
+                        <a class="btn btn-default dt-button buttons-pdf buttons-html5" tabindex="0"
+                            aria-controls="enquirytable" title="PDF" (click)="exportPdf()"><span><i
+                                    class="fa fa-file-pdf-o"></i></span>
+                        </a>
+                        <a class="btn btn-default dt-button buttons-print" tabindex="0" aria-controls="enquirytable"
+                            title="Print"><span><i class="fa fa-print" (click)="print(data)"></i></span>
+                        </a>
+                        <a class="btn btn-default dt-button buttons-collection buttons-colvis" tabindex="0"
+                            aria-controls="enquirytable" title="Columns" (click)="exportColumnChoose()"><span><i
+                                    class="fa fa-columns"></i></span>
+                        </a>
+                        <table id="enquirytable" class="display">
+                            <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Phone</th>
+                                    <th>Source</th>
+                                    <th>Enquiry Date</th>
+                                    <th>Last Follow Up Date</th>
+                                    <th>Next Follow Up Date</th>
+                                    <th>Status</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <!-- Table rows with data -->
+                            </tbody>
+                        </table>
+
+                        <a class="btn btn-default dt-button buttons-collection buttons-colvis" tabindex="0"
+                            aria-controls="enquirytable" title="Columns" (click)="exportColumnChoose()">
+                            <span><i class="fa fa-columns"></i></span>
+                        </a>
+
+                    </div>
+
+                    <div class="dataTables_filter">
+                        <label>
+                            <!-- <input type="search" [(ngModel)]="searchText" placeholder="Search..."
+                                aria-controls="enquirytable" autocomplete="off"> -->
+
+                        </label>
+                    </div>
+
+                    <table class='table table-hover table-striped table-bordered dataTable no-footer'
+                        role="grid">
+                        <thead>
+                            <th class="sorting_asc" tabindex="0" aria-controls="enquirytable" rowspan="1" colspan="1"
+                                style="width: 10px;" aria-sort="ascending"
+                                aria-label="Id_No                                                   : activate to sort column descending">
+                                Id_no </th>
+                            <th class="sorting" tabindex="0" aria-controls="enquirytable" rowspan="1" colspan="1"
+                                style="width: 250px;"
+                                aria-label="Name                                                   : activate to sort column ascending">
+                                Name </th>
+                            <th class="sorting" tabindex="0" aria-controls="enquirytable" rowspan="1" colspan="1"
+                                style="width: 100px;"
+                                aria-label="phone                                                   : activate to sort column ascending">
+                                phone</th>
+                            <th class="sorting" tabindex="0" aria-controls="enquirytable" rowspan="1" colspan="1"
+                                style="width: 100px;" aria-label="source: activate to sort column ascending">
+                                Source</th>
+                            <th class="sorting" tabindex="0" aria-controls="enquirytable" rowspan="1" colspan="1"
+                                style="width: 200px;"
+                                aria-label="Last Follow Up Date: activate to sort column ascending">Last Follow
+                                Up
+                                Date</th>
+                            <th class="sorting" tabindex="0" aria-controls="enquirytable" rowspan="1" colspan="1"
+                                style="width: 200px;"
+                                aria-label="Next Follow Up Date                                                    : activate to sort column ascending">
+                                Next Follow Up Date </th>
+                            <th class="sorting" tabindex="0" aria-controls="enquirytable" rowspan="1" colspan="1"
+                                style="width: 100px;"
+                                aria-label="Status                                                    : activate to sort column ascending">
+                                Status </th>
+                            <th class="text-right sorting" tabindex="0" aria-controls="enquirytable" rowspan="5"
+                                colspan="5" style="width: 800px;"
+                                aria-label="Action: activate to sort column ascending">
+                                Action</th>
+                        </thead>
+                        <!-- <tr *ngFor="let data of customers | filter : mySearchi | paginate:{ itemsPerPage: itemsPerPage, currentPage : page, totalItems :count}"> -->
+                        <tbody>
+
+                            <ng-container *ngFor="let data of adminssionEnquiry; let i = index">
+                                <tr
+                                    *ngIf="customFilter(data) && i >= (currentPage - 1) * recordsPerPage && i < currentPage * recordsPerPage">
+                                    <td>{{data.id}}</td>
+                                    <td>{{data.name }}</td>
+                                    <td>{{data.contact}}</td>
+                                    <td>{{data.source}}</td>
+                                    <td>{{data.enquiryDate }}</td>
+                                    <td>{{data.nextFollowUpDate}}</td>
+                                    <td>{{data.status }}</td>
+                                    <!-- <td (click)="edit(data.id)">Update</td> -->
+                                    <td class="icon-cell">
+                                        <i class="fas fa-edit" (click)="edit(data.id)"></i>
+                                        <i class="fas fa-trash" (click)="delete(data.id)"></i>
+                                        <!-- <i class="fas fa-eye" (click)="view(data.id)"></i> -->
+                                        <i class="fa fa-phone" (click)="phoneAction()"></i>
+                                    </td>
+                            </ng-container>
+                        </tbody>
+                    </table>
+                    <br>
+                    <br>
+                    <div class="alert alert-warning" *ngIf="currentPage === totalPages">
+                        You have reached the end of the current page.
+                        <img src="assets/tableImg/empty-folder.png" alt="No Data" *ngIf="adminssionEnquiry.length === 0"
+                            style="display: flex; width: 100%; background: #000; height: 10%;">
+                    </div>
+
+
+                    <div class="pagination justify-content-end">
+                        <div>
+                            <button (click)="prevPage()" [disabled]="currentPage === 1"
+                                [class]="'btn btn-primary ' + (currentPage === 1 ? 'disabled' : '')">Previous</button>
+                            <button (click)="nextPage()" [disabled]="currentPage === totalPages"
+                                [class]="'btn btn-primary ' + (currentPage === totalPages ? 'disabled' : '')">Next</button>
+                        </div>
+                    </div>
+
+
+
+
+                </div>
+
+
+                <!-- Button trigger modal -->
+                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">
+                    Launch demo modal
+                </button>
+
+                <!-- Modal -->
+                <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog"
+                    aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                ...
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                <button type="button" class="btn btn-primary">Save changes</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+
+
+
+
+                <!-- ------------next form -------phone Action-->
+                <div class="popup-overlay active" [hidden]="!showpopup">
+                    <div class="popup-content">
+                        <div class="modal-header modal-media-header">
+                            <h4 class="box-title" style="animation: both; ">Follow Up Admission Enquiry</h4>
+                            <button type="button" (click)="closePopu()"
+                                class="btn btn-primary btn-sm checkbox-toggle pull-right" aria-label="Close"
+                                style="margin: auto;">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+
+                        </div>
+                        <div class="modal-body pt0 pb0" id="getdetails_follow_up">
+                            <div class="row row-eq">
+                                <div class="col-lg-8 col-md-8 col-sm-8 paddlr">
+                                    <!-- general form elements -->
+
+                                    <form id="folow_up_data" method="post" class="ptt10">
+                                        <div class="row">
+                                            <div class="col-lg-6 col-md-6 col-sm-6">
+                                                <div class="form-group">
+                                                    <label for="exampleInputEmail1">Follow Up Date</label><small
+                                                        class="req"> *</small>
+
+                                                    <input type="hidden" id="enquiry_id" name="enquiry_id" value="12">
+                                                    <input type="hidden" id="enquiry_status" name="enquiry_status"
+                                                        value="active">
+                                                    <input type="text" id="follow_date" name="date"
+                                                        class="form-control date" value="08/03/2023" readonly="">
+                                                    <span class="text-danger" id="date_error"></span>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-6 col-md-6 col-sm-6">
+                                                <div class="form-group">
+                                                    <label for="pwd">Next Follow Up Date</label><small class="req">
+                                                        *</small>
+                                                    <input type="text" id="follow_date_of_call" name="follow_up_date"
+                                                        class="form-control date" value="" readonly="">
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-6 col-md-6 col-sm-6">
+                                                <div class="form-group">
+                                                    <label for="pwd">Response</label><small class="req"> *</small>
+                                                    <textarea name="response" id="response"
+                                                        class="form-control"></textarea>
+                                                    <span class="text-danger" id="responce_error"></span>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-6 col-md-6 col-sm-6">
+                                                <div class="form-group">
+                                                    <label for="pwd">Note</label>
+                                                    <textarea name="note" id="note" class="form-control"></textarea>
+                                                </div>
+                                            </div>
+                                        </div><!-- /.box-body -->
+                                        <div class="box-footer pr0">
+                                            <a onclick="follow_save()" class="btn btn-info pull-right">Save</a>
+                                        </div>
+                                    </form>
+                                    <!-- ---------Follow up starting ---------- -->
+                                    <div class="ptbnull">
+                                        <h4 class="box-title titlefix pb5">Follow Up</h4>
+                                        <div class="box-tools pull-right">
+                                        </div><!-- /.box-tools -->
+                                    </div><!-- /.box-header -->
+                                    <div class="icon-cell i">
+
+                                        <div class="tab-pane active" id="timeline">
+                                            <ul class="timeline timeline-inverse">
+                                                <h1>hi aru</h1>
+                                                <li>
+                                                    <i class="fa fa-phone bg-blue"></i>
+                                                    <div class="timeline-item">
+                                                        <span class="time">
+                                                            <a class="defaults-c text-right" data-toggle="tooltip"
+                                                                title="" onclick="delete_next_call(2,12)"
+                                                                data-original-title="Delete"><i
+                                                                    class="fa fa-trash"></i></a>
+                                                        </span>
+                                                        <h3 class="timeline-header"><a> Super Admin</a>
+                                                        </h3>
+                                                        <div class="timeline-body">
+                                                            <h1>hi</h1>
+                                                            <div class="divider"></div>
+
+                                                        </div>
+                                                        <div class="">
+
+
+                                                        </div>
+                                                    </div>
+                                                </li>
+                                                <li><i class="fa fa-clock-o bg-gray"></i></li>
+                                            </ul>
+
+                                        </div>
+                                    </div><!-- /.box-body -->
+                                </div><!--/.col (left) -->
+
+
+
+                                <!-- ------------left side starting -->
+                                <div class="col-lg-4 col-md-4 col-sm-4 col-eq">
+                                    <div class="taskside">
+                                        <h4>Summary <div style="font-size: 15px;" class="box-tools pull-right">
+                                                <label>Status</label>
+                                                <div class="form-group">
+                                                    <select class="form-control" id="status_data"
+                                                        onchange="changeStatus(this.value, '12')">
+
+                                                        <option selected="" value="active">Active</option>
+                                                        <option value="passive">Passive</option>
+                                                        <option value="dead">Dead</option>
+                                                        <option value="won">Won</option>
+                                                        <option value="lost">Lost</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </h4>
+                                        <!-- /.box-tools -->
+                                        <h5 class="pt0 task-info-created">
+
+
+                                        </h5>
+
+                                        <hr class="taskseparator">
+
+                                        <!-- <div class="task-info task-single-inline-wrap task-info-start-date">
+                                            <h5><i
+                                                    class="fa task-info-icon fa-fw fa-lg fa-calendar-plus-o pull-left fa-margin"></i>
+                                                Last Follow Up Date: 08/03/2023
+                                            </h5>
+                                        </div>
+                                        <div class="task-info task-single-inline-wrap task-info-start-date">
+                                            <h5><i
+                                                    class="fa task-info-icon fa-fw fa-lg fa-calendar-plus-o pull-left fa-margin"></i>
+                                                Next Follow Up Date: 08/15/2023
+                                            </h5>
+                                        </div> -->
+                                        <div class="task-info task-single-inline-wrap ptt10">
+                                            <!--     
+                    <label>Phone: 9112308419</label>
+                    <label>Address: At post.Kharde,Deola,Nashik
+    deola</label>
+                    <label>Reference: Student</label>
+                    <label>Description: NA</label>
+                    <label>Note: </label>
+                    <label>Source: student</label>
+                    <label>Assigned: Aarti Salve</label>
+                    <label>Email: dhanugangurde19@gmail.com</label>
+                    <label>Class: 3</label>
+                    <label>Number Of Child: 2</label> -->
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <script>
+
+
+
+
+                                function follow_save() {
+                                    //alert('Jai Shree Ram');
+                                    var id = $('#enquiry_id').val();
+                                    var status = $('#enquiry_status').val();
+                                    var responce = $('#response').val();
+                                    var follow_date = $('#follow_date').val();
+                                    //  alert(follow_date);
+
+                                    $.ajax({
+                                        url: 'http://innovatorsps.in/smart_school/admin/enquiry/follow_up_insert',
+                                        type: 'POST',
+                                        dataType: 'json',
+                                        data: $("#folow_up_data").serialize(),
+                                        success: function (data) {
+
+                                            //alert(data);
+
+                                            if (data.status == "fail") {
+
+                                                var message = "";
+                                                $.each(data.error, function (index, value) {
+
+                                                    message += value;
+                                                });
+                                                errorMsg(message);
+                                            } else {
+
+                                                successMsg(data.message);
+                                                follow_up_new(id, status);
+                                            }
+
+
+                                        },
+
+                                        error: function () {
+                                            alert("Fail")
+                                        }
+                                    });
+
+
+                                }
+
+                                // function follow_up(id) {
+                                //     $.ajax({
+                                //         url: 'http://innovatorsps.in/smart_school/admin/enquiry/follow_up/' + id,
+                                //         success: function (data) {
+                                //             $('#getdetails_follow_up').html(data);
+                                //             $.ajax({
+                                //                 url: 'http://innovatorsps.in/smart_school/admin/enquiry/follow_up_list/' + id,
+                                //                 success: function (data) {
+                                //                     $('#timeline').html(data);
+                                //                 },
+                                //                 error: function () {
+                                //                     alert("Fail")
+                                //                 }
+                                //             });
+                                //         },
+                                //         error: function () {
+                                //             alert("Fail")
+                                //         }
+                                //     });
+                                // }
+
+
+                                function follow_up_new(id, status) {
+
+                                    $.ajax({
+                                        url: 'http://innovatorsps.in/smart_school/admin/enquiry/follow_up/' + id + '/' + status,
+                                        success: function (data) {
+                                            $('#getdetails_follow_up').html(data);
+                                            $.ajax({
+                                                url: 'http://innovatorsps.in/smart_school/admin/enquiry/follow_up_list/' + id,
+                                                success: function (data) {
+                                                    $('#timeline').html(data);
+                                                },
+                                                error: function () {
+                                                    alert("Fail")
+                                                }
+                                            });
+                                        },
+                                        error: function () {
+                                            alert("Fail")
+                                        }
+                                    });
+                                }
+
+                                function changeStatus(status, id) {
+
+                                    //alert(status+id);
+
+                                    $.ajax({
+                                        url: 'http://innovatorsps.in/smart_school/admin/enquiry/change_status/',
+                                        type: 'POST',
+                                        dataType: 'json',
+                                        data: { status: status, id: id },
+                                        success: function (data) {
+                                            if (data.status == "fail") {
+
+                                                errorMsg(data.message);
+                                            } else {
+
+                                                successMsg(data.message);
+                                                follow_up_new(id, status);
+                                            }
+                                        }
+
+                                    })
+                                }
+
+                            </script>
+
+                        </div>
+                    </div>

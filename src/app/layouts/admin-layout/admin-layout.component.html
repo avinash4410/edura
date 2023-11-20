@@ -1,0 +1,82 @@
+    <div class="sidenav" [ngClass]="collapsed ? 'sidenav-collapsed':''"(mouseleave)="onMouseLeave($event)" (mouseenter)="onMouseEnter()">
+        
+        <div class="logo-container">
+            <button class="logo" (click)="toggleCollapse()">A</button>
+            <button class="btn-close" @rotate *ngIf="collapsed" (click)="closeSidenav()">
+              <i class="fas fa-times close-icon"></i>
+            </button>        </div>
+        <ul class="sidenav-nav">
+            <li class="sidenav-nav-item" *ngFor="let data of navData" >
+                <a class="sidenav-nav-link" (click)="toggleSubMenu(data) " 
+                [routerLink]="[data.routeLink]" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true}"
+                >
+                    <i class="sidenav-link-icon" [class]="data.icon" (click)="toggleCollapse()" ></i>
+                    <span class="sidenav-link-text" @fadeInOut *ngIf="collapsed">{{data.label}}</span>
+                </a>
+                
+                <ul  *ngIf="data.showSubItems && collapsed">
+                    <li class="sub-menu-item" *ngFor="let subItem of data.subItem">
+                        
+                        
+                        <!-- <a [routerLink]="[subItem.routeLink]">{{subItem.label}}</a> -->
+
+                        <a>
+                            <i [class]="subItem.icon"></i>
+                            {{subItem.label}}</a>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+
+
+
+<div class="col-12 ps-0">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container-fluid">
+            
+            <span (click)="toggleCollapse()" style=" margin-left: 10%; color:red;"
+            class="navbar-toggler-icon text-white"></span>
+            <h2 class="Welcomename">Welcome {{user?.firstName}}</h2>
+
+
+            
+
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                    </li>
+                    <li class="nav-item">
+                    </li>
+                    <li class="nav-item dropdown">
+                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="nav-item">
+                    </li>
+                </ul>
+                <form class="d-flex">
+                    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                    <button class="btn btn-outline-success" type="submit">Search</button>
+                </form>
+                <a class="nav-link dropdown-toggle text-white ms-2" role="button" data-bs-display="static"
+                    data-bs-toggle="dropdown" aria-expanded="false">
+                    My Profile
+                </a>
+                <div class="dropdown-menu dropdown-menu-end dropdown-menu-lg-end">
+                    <app-profile-card></app-profile-card>
+                </div>
+            </div>
+        </div>
+    </nav>
+    <i class="fa fa-camera"></i>
+    <router-outlet></router-outlet>
+   
+
+    
+
+</div>
